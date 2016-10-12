@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='myApp'>
+
+<head>
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css" />
+    <!-- endbower -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="styles.css"></link>
+    <!-- endinject -->
+</head>
+
+<body ng-controller="WeatherCtrl as vm">
+    <div id="weatherapp" " ng-click="add(newItem) " class="container-fluid ">
+        <div class="row ">
+            <title>Origin Weather App</title>
+               <header>
+      <u><center><h1>Origin Weather</h1></center></u>
+        <br>
+       <center><u><h4><b>Always know if you need sunscreen, or an umbrella!</b></h4></u></center>
+    </header>
+            <form>
+            <!-- Button group contains city date -->
+                <div class="btn-group-lg info " role="group " aria-label="big cities ">
+                    <button type="button " class="btn btn-info " ng-click="vm.activate( 'San Diego') ">San Diego</button>
+                    <button type="button " class="btn btn-info " ng-click="vm.activate( 'New York') ">New York</button>
+                    <button type="button " class="btn btn-info " ng-click="vm.activate( 'Washington D.C') ">Washington D.C</button>
+                    <button type="button " class="btn btn-info " ng-click="vm.activate( 'London') ">London</button>
+                    <button type="button " class="btn btn-info " ng-click="vm.activate( 'Tokyo') ">Tokyo</button>
+                </div>
+                <br>
+            </form>
+            <!--Button to display results -->
+     <div class="col-lg-6 ">
+    <div class="input-group ">
+        <input type="text " class="form-control " ng-model="vm.city ">
+        <span class="input-group-btn ">
+        <button class="btn btn-info " type="button " ng-click="vm.activate (vm.city) ">Show me the Weather!</button>
+      </span>
+                    </div>
+                <br>
+            </div>
+        </div>
+       <!-- Weather Detail Table -->
+        <div class=" ">
+            <div class="col-xs-6 ">
+                <div class="panel panel-info ">
+                    <div class="panel-heading ">Weather Details</div>
+                    <div class="panel-body ">
+                        <p>{{vm.cityData.data.name}}</p>
+                        <label>Lat/Long: </label>
+                        <p>{{vm.coord.lat}}{{vm.cityData.data.coord.lon}}</p>                    
+                        <br>
+                        <label>Temperature (F) </label>
+                        <p>{{vm.cityData.data.main.temp}}</p>
+                        <label>Pressure </label>
+                        <p>{{vm.cityData.data.main.pressure}}</p>
+                        <label>Humidity </label>
+                        <p>{{vm.cityData.data.main.humidity}}</p>
+                        <label>Wind Speed </label>
+                        <p>{{vm.cityData.data.wind.speed}}</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Weather Search History Table -->
+            <div class="col-xs-6 ">
+                <div class="panel panel-info ">
+                    <div class="panel-heading ">Weather History</div>
+                    <div class="panel-body ">
+                        <table class="table table-striped ">
+                            <tr ng-repeat="city in vm.searchHistory ">
+                                <td>{{city.event}}</td>
+                                <td class="text-right ">{{city.timeAndDate | date: 'MM/dd/yyyy HH:mm:ss'}}</td>
+                            </tr>
+                        </table>    
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+        <!-- bower:js -->
+        <script src="bower_components/angular/angular.js "></script>
+        <script src="bower_components/jquery/dist/jquery.js "></script>
+        <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js "></script>
+        <!-- endbower -->
+        <!-- inject:js -->
+        <script src="/app/app.js "></script>
+        <script src="/app/weather.controller.js "></script>
+        <script src="/app/weather.factory.js "></script>
+        <!-- endinject -->
+</body>
+
+</html>
